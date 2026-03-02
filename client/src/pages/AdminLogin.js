@@ -19,34 +19,36 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="card login-card">
-        <h2 style={{ color: '#b11226' }}>Admin Login</h2>
-        <p style={{ color: '#666', marginBottom: '25px' }}>Please enter your credentials to manage orders.</p>
-        <div style={{ textAlign: 'left' }}>
-          <label style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>Username</label>
+    <div className="login-wrapper">
+      <div className="login-box">
+        <h2>Admin Portal</h2>
+        <p>Login with your administrative credentials</p>
+
+        <div className="input-group">
+          <label>Username</label>
           <input
-            placeholder="e.g. admin_kunal"
+            type="text"
+            placeholder="Enter username"
             value={username}
             onChange={e => setUsername(e.target.value)}
           />
-          <label style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>Password</label>
+        </div>
+
+        <div className="input-group">
+          <label>Password</label>
           <input
-            placeholder="••••••••"
             type="password"
+            placeholder="••••••••"
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
         </div>
-        <button onClick={login} style={{ width: '100%', marginTop: '20px', padding: '14px' }}>
-          Sign In
-        </button>
-        <button
-          onClick={() => navigate('/')}
-          style={{ background: 'none', color: '#666', boxShadow: 'none', marginTop: '10px' }}
-        >
-          Back to Home
-        </button>
+
+        <button className="login-button" onClick={login}>Authenticate</button>
+
+        <div className="back-home" onClick={() => navigate('/')}>
+          ← Return to selection
+        </div>
       </div>
     </div>
   );

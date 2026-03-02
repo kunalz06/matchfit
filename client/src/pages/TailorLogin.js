@@ -19,28 +19,26 @@ const TailorLogin = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="card login-card">
-        <h2 style={{ color: '#b11226' }}>Tailor Login</h2>
-        <p style={{ color: '#666', marginBottom: '25px' }}>Enter your security code to view assigned tasks.</p>
-        <div style={{ textAlign: 'left' }}>
-          <label style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>Access Code</label>
+    <div className="login-wrapper">
+      <div className="login-box">
+        <h2>Tailor Access</h2>
+        <p>Enter your unique access code to view orders</p>
+
+        <div className="input-group">
+          <label>Security Code</label>
           <input
-            placeholder="Enter your tailor password"
             type="password"
+            placeholder="Enter password"
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
         </div>
-        <button onClick={login} style={{ width: '100%', marginTop: '20px', padding: '14px', backgroundColor: '#333' }}>
-          Access Dashboard
-        </button>
-        <button
-          onClick={() => navigate('/')}
-          style={{ background: 'none', color: '#666', boxShadow: 'none', marginTop: '10px' }}
-        >
-          Back to Home
-        </button>
+
+        <button className="login-button" onClick={login}>Access Dashboard</button>
+
+        <div className="back-home" onClick={() => navigate('/')}>
+          ← Return to selection
+        </div>
       </div>
     </div>
   );
