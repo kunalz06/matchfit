@@ -26,11 +26,7 @@ router.post('/tailor', (req, res) => {
 
         let matchedTailor = null;
         for (let tailor of results) {
-            // Check if password starts with bcrypt signature or compare plain text (to support legacy)
-            // But if we want to move to only bcrypt, we use await bcrypt.compare
             const match = await bcrypt.compare(password, tailor.password);
-
-            // To be robust during transition where some might be plaintext
             if (match || password === tailor.password) {
                 matchedTailor = tailor;
                 break;
@@ -41,6 +37,29 @@ router.post('/tailor', (req, res) => {
 
         res.json({ message: 'Tailor logged in', tailorName: matchedTailor.name });
     });
+});
+
+// Add new tailor (Admin only)
+router.post('/add-tailor', async (req, res) => {
+    const { name, password } = req.body;
+    if (!name || !password) {
+        return res.status(400).json({ message: 'Name and password are required' });
+    }
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const query = 'INSERT INTO tailors (name, password) VALUES (?, ?)';
+
+        db.query(query, [name, hashedPassword], (err, results) => {
+            if (err) {
+                if (err.code === 'ER_DUP_ENTRY') return res.status(400).json({ message: 'Tailor name already exists' });
+                return res.status(500).json({ error: err.message });
+            }
+            res.json({ message: 'Tailor added successfully' });
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
 module.exports = router;
