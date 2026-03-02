@@ -1,61 +1,147 @@
-/* styles/styles.css */
+:root {
+  --primary-color: #b11226;
+  --primary-hover: #8e0e1e;
+  --bg-color: #f8f9fa;
+  --card-bg: #ffffff;
+  --text-main: #333333;
+  --text-muted: #666666;
+  --border-radius: 12px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease;
+}
 
 body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #fdfdfd;
-    color: #111;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #8b0000; /* deep crimson */
-    color: white;
-    padding: 10px 20px;
-}
-
-button {
-    background-color: #ff1493; /* deep pink */
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    margin: 5px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-button:hover {
-    opacity: 0.9;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
 }
 
 .container {
-    padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+h1, h2, h3 {
+  color: var(--text-main);
+  margin-bottom: 1rem;
 }
 
-.table th, .table td {
-    border: 1px solid #111;
-    padding: 10px;
-    text-align: left;
+button {
+  padding: 10px 24px;
+  border-radius: var(--border-radius);
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 2px 8px rgba(177, 18, 38, 0.2);
 }
 
-.table th {
-    background-color: #8b0000;
-    color: white;
+button:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(177, 18, 38, 0.3);
 }
 
-.table tr:nth-child(even) {
-    background-color: #f2f2f2;
+button:active {
+  transform: translateY(0);
 }
 
-.sort-button {
-    margin-left: 5px;
-    font-size: 12px;
+button.secondary {
+  background-color: #6c757d;
+}
+
+button.secondary:hover {
+  background-color: #5a6268;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px 16px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: var(--transition);
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(177, 18, 38, 0.1);
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 30px;
+}
+
+.table-container {
+  overflow-x: auto;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+}
+
+td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover {
+  background-color: #fff9f9;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.status-in-progress { background: #fff4e5; color: #b76e00; }
+.status-completed { background: #e6fcf5; color: #087f5b; }
+.status-delivered { background: #e7f5ff; color: #1971c2; }
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
 }
