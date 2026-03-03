@@ -6,12 +6,15 @@ import '../styles/styles.css';
 
 const AdminDashboard = () => {
   const [orders, setOrders] = useState([]);
+  const [tailorsList, setTailorsList] = useState([]);
   const [sortField, setSortField] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
   const [editOrder, setEditOrder] = useState(null);
   const [showTailorPanel, setShowTailorPanel] = useState(false);
   const [showOverview, setShowOverview] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null);
+  const [deleteTailorTarget, setDeleteTailorTarget] = useState(null);
+  const [editTailor, setEditTailor] = useState(null);
   const [newTailor, setNewTailor] = useState({ name: '', password: '' });
 
   const [newOrder, setNewOrder] = useState({
@@ -33,8 +36,18 @@ const AdminDashboard = () => {
     }
   };
 
+  const fetchTailors = async () => {
+    try {
+      const res = await axios.get('http://localhost:5000/api/auth/tailors');
+      setTailorsList(res.data);
+    } catch (err) {
+      console.error('Failed to fetch tailors:', err.message);
+    }
+  };
+
   useEffect(() => {
     fetchOrders();
+    fetchTailors();
   }, []);
 
   const sortedOrders = [...orders].sort((a, b) => {
@@ -67,7 +80,7 @@ const AdminDashboard = () => {
       setEditOrder(null);
       fetchOrders();
     } catch (err) {
-      alert('Failed to save: ' + err.message);
+      alert('Failed to save: ' + (err.response?.data?.error || err.message));
     }
   };
 
@@ -78,10 +91,11 @@ const AdminDashboard = () => {
       setEditOrder(null);
       fetchOrders();
     } catch (err) {
-      alert('Failed to add: ' + err.message);
+      alert(err.response?.data?.error || 'Failed to add order: ' + err.message);
     }
   };
 
+  // ---- Tailor Management ----
   const handleAddTailor = async () => {
     if (!newTailor.name || !newTailor.password) {
       return alert("Please provide both Name and Password");
@@ -90,9 +104,35 @@ const AdminDashboard = () => {
       const res = await axios.post('http://localhost:5000/api/auth/add-tailor', newTailor);
       alert(res.data.message);
       setNewTailor({ name: '', password: '' });
-      setShowTailorPanel(false);
+      fetchTailors();
     } catch (err) {
       alert(err.response?.data?.message || 'Error adding tailor');
+    }
+  };
+
+  const handleUpdateTailor = async () => {
+    if (!editTailor || !editTailor.name) return alert("Tailor name is required");
+    try {
+      const res = await axios.put(`http://localhost:5000/api/auth/update-tailor/${editTailor.id}`, {
+        name: editTailor.name,
+        password: editTailor.newPassword || ''
+      });
+      alert(res.data.message);
+      setEditTailor(null);
+      fetchTailors();
+    } catch (err) {
+      alert(err.response?.data?.message || 'Error updating tailor');
+    }
+  };
+
+  const executeDeleteTailor = async () => {
+    if (!deleteTailorTarget) return;
+    try {
+      await axios.delete(`http://localhost:5000/api/auth/delete-tailor/${deleteTailorTarget.id}`);
+      setDeleteTailorTarget(null);
+      fetchTailors();
+    } catch (err) {
+      alert(err.response?.data?.message || 'Error deleting tailor');
     }
   };
 
@@ -124,7 +164,7 @@ const AdminDashboard = () => {
             </button>
             <button
               onClick={() => { setShowTailorPanel(!showTailorPanel); setShowOverview(false); }}
-              style={{ backgroundColor: '#333' }}
+              style={{ backgroundColor: showTailorPanel ? 'var(--primary-color)' : '#333' }}
             >
               👤 {showTailorPanel ? 'View Orders' : 'Manage Tailors'}
             </button>
@@ -182,31 +222,106 @@ const AdminDashboard = () => {
 
         {/* Manage Tailors Panel */}
         {showTailorPanel && (
-          <div className="card" style={{ borderLeft: '5px solid #333' }}>
-            <h3 style={{ marginTop: 0 }}>Add New Tailor</h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>The tailor will use the password below to access their dashboard.</p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
-              <div>
-                <label>Tailor Name</label>
-                <input
-                  placeholder="Full Name"
-                  value={newTailor.name}
-                  onChange={e => setNewTailor({ ...newTailor, name: e.target.value })}
-                />
+          <div>
+            {/* Add New Tailor */}
+            <div className="card" style={{ borderLeft: '5px solid #333' }}>
+              <h3 style={{ marginTop: 0 }}>➕ Add New Tailor</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>The tailor will use the password below to access their dashboard.</p>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+                <div>
+                  <label>Tailor Name</label>
+                  <input
+                    placeholder="Full Name"
+                    value={newTailor.name}
+                    onChange={e => setNewTailor({ ...newTailor, name: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label>Login Password</label>
+                  <input
+                    type="password"
+                    placeholder="Set password"
+                    value={newTailor.password}
+                    onChange={e => setNewTailor({ ...newTailor, password: e.target.value })}
+                  />
+                </div>
               </div>
-              <div>
-                <label>Login Password</label>
-                <input
-                  type="password"
-                  placeholder="Set password"
-                  value={newTailor.password}
-                  onChange={e => setNewTailor({ ...newTailor, password: e.target.value })}
-                />
+              <div style={{ marginTop: '20px', textAlign: 'right' }}>
+                <button onClick={handleAddTailor}>Register Tailor</button>
               </div>
             </div>
-            <div style={{ marginTop: '20px', textAlign: 'right' }}>
-              <button onClick={handleAddTailor}>Register Tailor</button>
+
+            {/* Existing Tailors List */}
+            <div className="card" style={{ borderLeft: '5px solid var(--primary-color)' }}>
+              <h3 style={{ marginTop: 0 }}>📋 Existing Tailors ({tailorsList.length})</h3>
+              {tailorsList.length === 0 ? (
+                <p style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '20px' }}>No tailors registered yet.</p>
+              ) : (
+                <div className="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th style={{ textAlign: 'right' }}>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {tailorsList.map(tailor => (
+                        <tr key={tailor.id}>
+                          <td>{tailor.id}</td>
+                          <td style={{ fontWeight: 'bold' }}>{tailor.name}</td>
+                          <td style={{ textAlign: 'right' }}>
+                            <button
+                              className="secondary"
+                              style={{ padding: '6px 12px', fontSize: '0.8rem', marginRight: '5px' }}
+                              onClick={() => setEditTailor({ ...tailor, newPassword: '' })}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              style={{ padding: '6px 12px', fontSize: '0.8rem', backgroundColor: 'var(--delete-btn-bg)', color: 'var(--primary-color)' }}
+                              onClick={() => setDeleteTailorTarget(tailor)}
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
+
+            {/* Edit Tailor Inline Form */}
+            {editTailor && (
+              <div className="card" style={{ borderLeft: '5px solid #ffc107' }}>
+                <h3 style={{ marginTop: 0 }}>✏️ Editing Tailor: {editTailor.name}</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+                  <div>
+                    <label>Tailor Name</label>
+                    <input
+                      value={editTailor.name}
+                      onChange={e => setEditTailor({ ...editTailor, name: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label>New Password (leave blank to keep current)</label>
+                    <input
+                      type="password"
+                      placeholder="New password (optional)"
+                      value={editTailor.newPassword}
+                      onChange={e => setEditTailor({ ...editTailor, newPassword: e.target.value })}
+                    />
+                  </div>
+                </div>
+                <div style={{ marginTop: '20px', textAlign: 'right' }}>
+                  <button className="secondary" style={{ marginRight: '10px' }} onClick={() => setEditTailor(null)}>Cancel</button>
+                  <button onClick={handleUpdateTailor}>Save Changes</button>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
@@ -251,8 +366,15 @@ const AdminDashboard = () => {
                   </div>
                   <div>
                     <label>Assigned Tailor</label>
-                    <input placeholder="Tailor Name" value={editOrder.tailor || newOrder.tailor}
-                      onChange={e => editOrder.tailor ? setEditOrder({ ...editOrder, tailor: e.target.value }) : setNewOrder({ ...newOrder, tailor: e.target.value })} />
+                    <select
+                      value={editOrder.tailor || newOrder.tailor}
+                      onChange={e => editOrder.orderNo ? setEditOrder({ ...editOrder, tailor: e.target.value }) : setNewOrder({ ...newOrder, tailor: e.target.value })}
+                    >
+                      <option value="">-- Select Tailor --</option>
+                      {tailorsList.map(t => (
+                        <option key={t.id} value={t.name}>{t.name}</option>
+                      ))}
+                    </select>
                   </div>
                   <div>
                     <label>Due Date</label>
@@ -328,7 +450,7 @@ const AdminDashboard = () => {
         )}
       </div>
 
-      {/* Delete Confirmation Modal */}
+      {/* Delete Order Confirmation Modal */}
       {deleteTarget && (
         <div className="modal-overlay">
           <div className="modal-box">
@@ -344,6 +466,29 @@ const AdminDashboard = () => {
             <div className="modal-actions">
               <button className="secondary" onClick={() => setDeleteTarget(null)}>Cancel</button>
               <button style={{ backgroundColor: '#c53030' }} onClick={executeDelete}>Delete Order</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Tailor Confirmation Modal */}
+      {deleteTailorTarget && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>⚠️ Delete Tailor Account</h3>
+            <p style={{ margin: '15px 0' }}>
+              Are you sure you want to permanently delete this tailor account?
+            </p>
+            <div style={{ background: 'var(--modal-detail-bg)', padding: '15px', borderRadius: '8px', margin: '15px 0', textAlign: 'left' }}>
+              <p style={{ margin: '4px 0' }}><strong>ID:</strong> {deleteTailorTarget.id}</p>
+              <p style={{ margin: '4px 0' }}><strong>Name:</strong> {deleteTailorTarget.name}</p>
+            </div>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+              Note: Existing orders assigned to this tailor will not be affected.
+            </p>
+            <div className="modal-actions">
+              <button className="secondary" onClick={() => setDeleteTailorTarget(null)}>Cancel</button>
+              <button style={{ backgroundColor: '#c53030' }} onClick={executeDeleteTailor}>Delete Tailor</button>
             </div>
           </div>
         </div>

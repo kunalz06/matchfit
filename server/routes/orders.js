@@ -33,9 +33,17 @@ router.get('/:orderNo', (req, res) => {
 // Add new order (Admin)
 router.post('/add', (req, res) => {
     const { orderNo, type, tailor, dueDate, status } = req.body;
+    if (!orderNo || !type || !tailor || !dueDate) {
+        return res.status(400).json({ error: 'All fields are required (orderNo, type, tailor, dueDate)' });
+    }
     const query = `INSERT INTO orders (orderNo,type,tailor,dueDate,status) VALUES(?,?,?,?,?)`;
-    db.query(query, [orderNo, type, tailor, dueDate, status], (err) => {
-        if (err) return res.status(500).json({ error: err.message });
+    db.query(query, [orderNo, type, tailor, dueDate, status || 'in progress'], (err) => {
+        if (err) {
+            if (err.code === 'ER_DUP_ENTRY') {
+                return res.status(400).json({ error: 'Order number already exists. Please use a unique order number.' });
+            }
+            return res.status(500).json({ error: err.message });
+        }
         res.json({ message: 'Order added' });
     });
 });
