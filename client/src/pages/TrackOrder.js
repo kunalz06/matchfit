@@ -26,11 +26,11 @@ const TrackOrder = () => {
   };
 
   const getStatusStyle = (s) => {
-    if (s === 'Order not found') return { bg: '#fff5f5', border: '#feb2b2', color: '#c53030' };
-    if (s === 'delivered') return { bg: '#f0fff4', border: '#9ae6b4', color: '#276749' };
-    if (s === 'completed') return { bg: '#fff3cd', border: '#ffc107', color: '#856404' };
-    if (s === 'in progress') return { bg: '#fff5f5', border: '#feb2b2', color: '#c53030' };
-    return { bg: '#f0fff4', border: '#9ae6b4', color: '#276749' };
+    if (s === 'Order not found') return { bg: 'var(--bg-color)', border: '#feb2b2', color: '#c53030' };
+    if (s === 'delivered') return { bg: 'var(--bg-color)', border: '#9ae6b4', color: '#276749' };
+    if (s === 'completed') return { bg: 'var(--bg-color)', border: '#ffc107', color: '#856404' };
+    if (s === 'in progress') return { bg: 'var(--bg-color)', border: '#feb2b2', color: '#c53030' };
+    return { bg: 'var(--bg-color)', border: '#9ae6b4', color: '#276749' };
   };
 
   // Landing state
@@ -41,8 +41,8 @@ const TrackOrder = () => {
         <div className="container" style={{ display: 'flex', justifyContent: 'center' }}>
           <div className="card" style={{ width: '100%', maxWidth: '500px', textAlign: 'center', padding: '60px 40px' }}>
             <div style={{ fontSize: '4rem', marginBottom: '15px' }}>📦</div>
-            <h2 style={{ color: '#333', marginBottom: '10px' }}>Welcome to Matchfit</h2>
-            <p style={{ color: '#666', fontSize: '1.1rem', marginBottom: '35px' }}>
+            <h2 style={{ color: 'var(--text-main)', marginBottom: '10px' }}>Welcome to Matchfit</h2>
+            <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', marginBottom: '35px' }}>
               Got your order? Track it here.
             </p>
             <button onClick={() => setStarted(true)} style={{ padding: '16px 40px', fontSize: '1.1rem' }}>

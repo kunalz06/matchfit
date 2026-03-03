@@ -4,10 +4,10 @@ const Header = ({ title, role }) => (
   <header style={{
     width: '100%',
     padding: '30px 0',
-    backgroundColor: '#e11d48',
+    backgroundColor: 'var(--primary-color)',
     color: 'white',
     textAlign: 'center',
-    boxShadow: '0 4px 12px rgba(225,29,72,0.25)',
+    boxShadow: 'var(--shadow)',
     borderBottomLeftRadius: '25px',
     borderBottomRightRadius: '25px',
     marginBottom: '30px',

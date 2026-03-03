@@ -10,7 +10,7 @@ const Customer = () => {
       <Header title="MatchFit Customer Portal" />
       <div className="container" style={{ textAlign: 'center' }}>
         <div className="card" style={{ maxWidth: '800px', margin: '0 auto', padding: '40px' }}>
-          <h2 style={{ color: '#e11d48' }}>Welcome to Our Studio</h2>
+          <h2 style={{ color: 'var(--primary-color)' }}>Welcome to Our Studio</h2>
           <p style={{ fontSize: '1.2rem', color: '#555', marginBottom: '30px' }}>
             Experience the perfect fit. We provide premium stitching, alterations, and bespoke designs tailored just for you.
           </p>

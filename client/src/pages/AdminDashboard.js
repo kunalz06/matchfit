@@ -118,7 +118,7 @@ const AdminDashboard = () => {
           <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
             <button
               onClick={() => { setShowOverview(!showOverview); setShowTailorPanel(false); }}
-              style={{ backgroundColor: showOverview ? '#e11d48' : '#555' }}
+              style={{ backgroundColor: showOverview ? 'var(--primary-color)' : '#555' }}
             >
               📊 {showOverview ? 'Hide Overview' : 'Status Overview'}
             </button>
@@ -134,23 +134,23 @@ const AdminDashboard = () => {
 
         {/* Status Overview Panel */}
         {showOverview && (
-          <div className="card" style={{ borderLeft: '5px solid #e11d48' }}>
+          <div className="card" style={{ borderLeft: '5px solid var(--primary-color)' }}>
             <h3 style={{ marginTop: 0 }}>📊 Status Overview</h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '15px', marginBottom: '25px' }}>
-              <div style={{ background: '#fff5f5', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
+              <div style={{ background: 'var(--bg-color)', padding: '20px', borderRadius: '12px', textAlign: 'center', border: '1px solid var(--border-color)' }}>
                 <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#c53030' }}>{statusCounts['in progress'] || 0}</div>
                 <div style={{ fontSize: '0.85rem', color: '#c53030', fontWeight: 600 }}>In Progress</div>
               </div>
-              <div style={{ background: '#fff3cd', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
+              <div style={{ background: 'var(--bg-color)', padding: '20px', borderRadius: '12px', textAlign: 'center', border: '1px solid var(--border-color)' }}>
                 <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#856404' }}>{statusCounts['completed'] || 0}</div>
                 <div style={{ fontSize: '0.85rem', color: '#856404', fontWeight: 600 }}>Completed</div>
               </div>
-              <div style={{ background: '#f0fff4', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
+              <div style={{ background: 'var(--bg-color)', padding: '20px', borderRadius: '12px', textAlign: 'center', border: '1px solid var(--border-color)' }}>
                 <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#276749' }}>{statusCounts['delivered'] || 0}</div>
                 <div style={{ fontSize: '0.85rem', color: '#276749', fontWeight: 600 }}>Delivered</div>
               </div>
-              <div style={{ background: '#f8f9fa', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
-                <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#333' }}>{orders.length}</div>
+              <div style={{ background: 'var(--bg-color)', padding: '20px', borderRadius: '12px', textAlign: 'center', border: '1px solid var(--border-color)' }}>
+                <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--text-main)' }}>{orders.length}</div>
                 <div style={{ fontSize: '0.85rem', color: '#666', fontWeight: 600 }}>Total Orders</div>
               </div>
             </div>
@@ -228,7 +228,7 @@ const AdminDashboard = () => {
             </div>
 
             {editOrder !== null && (
-              <div className="card" style={{ borderLeft: '5px solid #e11d48' }}>
+              <div className="card" style={{ borderLeft: '5px solid var(--primary-color)' }}>
                 <h3 style={{ marginTop: 0 }}>{editOrder.orderNo ? `Editing Order #${editOrder.orderNo}` : 'New Order Details'}</h3>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '15px' }}>
                   <div>
@@ -312,7 +312,7 @@ const AdminDashboard = () => {
                             Edit
                           </button>
                           <button
-                            style={{ padding: '6px 12px', fontSize: '0.8rem', backgroundColor: '#ffe3e6', color: '#e11d48' }}
+                            style={{ padding: '6px 12px', fontSize: '0.8rem', backgroundColor: 'transparent', border: '1px solid var(--border-color)', color: 'var(--primary-color)' }}
                             onClick={() => confirmDelete(order)}
                           >
                             Delete
@@ -336,7 +336,7 @@ const AdminDashboard = () => {
             <p style={{ margin: '15px 0', color: '#555' }}>
               Are you sure you want to permanently delete this order?
             </p>
-            <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', margin: '15px 0', textAlign: 'left' }}>
+            <div style={{ background: 'var(--bg-color)', border: '1px solid var(--border-color)', padding: '15px', borderRadius: '8px', margin: '15px 0', textAlign: 'left', color: 'var(--text-main)' }}>
               <p style={{ margin: '4px 0' }}><strong>Order No:</strong> #{deleteTarget.orderNo}</p>
               <p style={{ margin: '4px 0' }}><strong>Tailor:</strong> {deleteTarget.tailor}</p>
               <p style={{ margin: '4px 0' }}><strong>Status:</strong> {deleteTarget.status}</p>
