@@ -12,10 +12,10 @@ const Home = () => {
       alignItems: 'center',
       justifyContent: 'center',
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #fdfdfd 0%, #f4f4f4 100%)'
+      background: 'linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%)'
     }}>
       <div className="card" style={{ padding: '50px', maxWidth: '600px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: '3rem', color: '#b11226', marginBottom: '10px' }}>MatchFit</h1>
+        <h1 style={{ fontSize: '3rem', color: '#e11d48', marginBottom: '10px' }}>MatchFit</h1>
         <p style={{ color: '#666', fontSize: '1.2rem', marginBottom: '40px' }}>
           Precision Tailoring & Order Management System
         </p>

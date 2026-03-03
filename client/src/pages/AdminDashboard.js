@@ -118,7 +118,7 @@ const AdminDashboard = () => {
           <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
             <button
               onClick={() => { setShowOverview(!showOverview); setShowTailorPanel(false); }}
-              style={{ backgroundColor: showOverview ? '#b11226' : '#555' }}
+              style={{ backgroundColor: showOverview ? '#e11d48' : '#555' }}
             >
               📊 {showOverview ? 'Hide Overview' : 'Status Overview'}
             </button>
@@ -134,7 +134,7 @@ const AdminDashboard = () => {
 
         {/* Status Overview Panel */}
         {showOverview && (
-          <div className="card" style={{ borderLeft: '5px solid #b11226' }}>
+          <div className="card" style={{ borderLeft: '5px solid #e11d48' }}>
             <h3 style={{ marginTop: 0 }}>📊 Status Overview</h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '15px', marginBottom: '25px' }}>
               <div style={{ background: '#fff5f5', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
@@ -228,7 +228,7 @@ const AdminDashboard = () => {
             </div>
 
             {editOrder !== null && (
-              <div className="card" style={{ borderLeft: '5px solid #b11226' }}>
+              <div className="card" style={{ borderLeft: '5px solid #e11d48' }}>
                 <h3 style={{ marginTop: 0 }}>{editOrder.orderNo ? `Editing Order #${editOrder.orderNo}` : 'New Order Details'}</h3>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '15px' }}>
                   <div>
@@ -312,7 +312,7 @@ const AdminDashboard = () => {
                             Edit
                           </button>
                           <button
-                            style={{ padding: '6px 12px', fontSize: '0.8rem', backgroundColor: '#ffe3e6', color: '#b11226' }}
+                            style={{ padding: '6px 12px', fontSize: '0.8rem', backgroundColor: '#ffe3e6', color: '#e11d48' }}
                             onClick={() => confirmDelete(order)}
                           >
                             Delete
