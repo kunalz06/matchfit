@@ -4,3 +4,5 @@ node_modules
 dist
 build
 .gemini
+_agents/
+SKILL.md
