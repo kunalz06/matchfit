@@ -21,6 +21,15 @@
   --login-border: #e1e4e8;
   --back-link-color: #888;
   --delete-btn-bg: #ffe3e6;
+  --status-pending-bg: #fff5f5;
+  --status-pending-text: #c53030;
+  --status-pending-border: #feb2b2;
+  --status-completed-bg: #fff3cd;
+  --status-completed-text: #856404;
+  --status-completed-border: #ffc107;
+  --status-delivered-bg: #f0fff4;
+  --status-delivered-text: #276749;
+  --status-delivered-border: #9ae6b4;
   --border-radius: 12px;
   --shadow: 0 4px 20px rgba(225, 29, 72, 0.06);
   --transition: all 0.3s ease;
@@ -50,6 +59,15 @@
     --login-border: #333333;
     --back-link-color: #999;
     --delete-btn-bg: #3d1519;
+    --status-pending-bg: rgba(197, 48, 48, 0.15);
+    --status-pending-text: #fc8181;
+    --status-pending-border: rgba(197, 48, 48, 0.3);
+    --status-completed-bg: rgba(133, 100, 4, 0.2);
+    --status-completed-text: #f6e05e;
+    --status-completed-border: rgba(133, 100, 4, 0.3);
+    --status-delivered-bg: rgba(39, 103, 73, 0.2);
+    --status-delivered-text: #68d391;
+    --status-delivered-border: rgba(39, 103, 73, 0.3);
     --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   }
 }
@@ -77,6 +95,15 @@
   --login-border: #333333;
   --back-link-color: #999;
   --delete-btn-bg: #3d1519;
+  --status-pending-bg: rgba(197, 48, 48, 0.15);
+  --status-pending-text: #fc8181;
+  --status-pending-border: rgba(197, 48, 48, 0.3);
+  --status-completed-bg: rgba(133, 100, 4, 0.2);
+  --status-completed-text: #f6e05e;
+  --status-completed-border: rgba(133, 100, 4, 0.3);
+  --status-delivered-bg: rgba(39, 103, 73, 0.2);
+  --status-delivered-text: #68d391;
+  --status-delivered-border: rgba(39, 103, 73, 0.3);
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 

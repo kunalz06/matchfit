@@ -177,19 +177,19 @@ const AdminDashboard = () => {
           <div className="card" style={{ borderLeft: '5px solid var(--primary-color)' }}>
             <h3 style={{ marginTop: 0 }}>📊 Status Overview</h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '15px', marginBottom: '25px' }}>
-              <div style={{ background: '#fff5f5', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
-                <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#c53030' }}>{statusCounts['in progress'] || 0}</div>
-                <div style={{ fontSize: '0.85rem', color: '#c53030', fontWeight: 600 }}>In Progress</div>
+              <div style={{ background: 'var(--status-pending-bg)', border: '1px solid var(--status-pending-border)', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
+                <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--status-pending-text)' }}>{statusCounts['in progress'] || 0}</div>
+                <div style={{ fontSize: '0.85rem', color: 'var(--status-pending-text)', fontWeight: 600 }}>In Progress</div>
               </div>
-              <div style={{ background: '#fff3cd', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
-                <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#856404' }}>{statusCounts['completed'] || 0}</div>
-                <div style={{ fontSize: '0.85rem', color: '#856404', fontWeight: 600 }}>Completed</div>
+              <div style={{ background: 'var(--status-completed-bg)', border: '1px solid var(--status-completed-border)', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
+                <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--status-completed-text)' }}>{statusCounts['completed'] || 0}</div>
+                <div style={{ fontSize: '0.85rem', color: 'var(--status-completed-text)', fontWeight: 600 }}>Completed</div>
               </div>
-              <div style={{ background: '#f0fff4', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
-                <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#276749' }}>{statusCounts['delivered'] || 0}</div>
-                <div style={{ fontSize: '0.85rem', color: '#276749', fontWeight: 600 }}>Delivered</div>
+              <div style={{ background: 'var(--status-delivered-bg)', border: '1px solid var(--status-delivered-border)', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
+                <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--status-delivered-text)' }}>{statusCounts['delivered'] || 0}</div>
+                <div style={{ fontSize: '0.85rem', color: 'var(--status-delivered-text)', fontWeight: 600 }}>Delivered</div>
               </div>
-              <div style={{ background: 'var(--feature-card-bg)', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
+              <div style={{ background: 'var(--feature-card-bg)', border: '1px solid var(--border-color)', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
                 <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--text-main)' }}>{orders.length}</div>
                 <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>Total Orders</div>
               </div>

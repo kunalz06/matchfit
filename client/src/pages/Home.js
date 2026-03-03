@@ -24,7 +24,7 @@ const Home = () => {
           <button onClick={() => navigate('/admin-login')} style={{ padding: '18px' }}>
             🔐 Admin Access
           </button>
-          <button onClick={() => navigate('/tailor-login')} style={{ padding: '18px', backgroundColor: '#333' }}>
+          <button onClick={() => navigate('/tailor-login')} style={{ padding: '18px', backgroundColor: 'var(--text-main)', color: 'var(--bg-color)' }}>
             🧵 Tailor Access
           </button>
           <button onClick={() => navigate('/customer')} className="secondary" style={{ padding: '18px' }}>

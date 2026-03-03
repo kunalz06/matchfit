@@ -26,11 +26,11 @@ const TrackOrder = () => {
   };
 
   const getStatusStyle = (s) => {
-    if (s === 'Order not found') return { bg: '#fff5f5', border: '#feb2b2', color: '#c53030' };
-    if (s === 'delivered') return { bg: '#f0fff4', border: '#9ae6b4', color: '#276749' };
-    if (s === 'completed') return { bg: '#fff3cd', border: '#ffc107', color: '#856404' };
-    if (s === 'in progress') return { bg: '#fff5f5', border: '#feb2b2', color: '#c53030' };
-    return { bg: '#f0fff4', border: '#9ae6b4', color: '#276749' };
+    if (s === 'Order not found') return { bg: 'var(--status-pending-bg)', border: 'var(--status-pending-border)', color: 'var(--status-pending-text)' };
+    if (s === 'delivered') return { bg: 'var(--status-delivered-bg)', border: 'var(--status-delivered-border)', color: 'var(--status-delivered-text)' };
+    if (s === 'completed') return { bg: 'var(--status-completed-bg)', border: 'var(--status-completed-border)', color: 'var(--status-completed-text)' };
+    if (s === 'in progress') return { bg: 'var(--status-pending-bg)', border: 'var(--status-pending-border)', color: 'var(--status-pending-text)' };
+    return { bg: 'var(--status-delivered-bg)', border: 'var(--status-delivered-border)', color: 'var(--status-delivered-text)' };
   };
 
   // Landing state
