@@ -12,11 +12,11 @@ const Home = () => {
       alignItems: 'center',
       justifyContent: 'center',
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, var(--bg-color) 0%, var(--card-bg) 100%)'
+      background: 'linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%)'
     }}>
       <div className="card" style={{ padding: '50px', maxWidth: '600px', textAlign: 'center' }}>
         <h1 style={{ fontSize: '3rem', color: 'var(--primary-color)', marginBottom: '10px' }}>MatchFit</h1>
-        <p style={{ color: '#666', fontSize: '1.2rem', marginBottom: '40px' }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: '1.2rem', marginBottom: '40px' }}>
           Precision Tailoring & Order Management System
         </p>
 
@@ -32,7 +32,7 @@ const Home = () => {
           </button>
         </div>
       </div>
-      <footer style={{ marginTop: '30px', color: '#aaa', fontSize: '0.9rem' }}>
+      <footer style={{ marginTop: '30px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
         © 2026 MatchFit tailoring services. All rights reserved.
       </footer>
     </div>

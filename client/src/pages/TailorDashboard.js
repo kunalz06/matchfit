@@ -73,7 +73,7 @@ const TailorDashboard = () => {
             <div style={{ padding: '60px', textAlign: 'center' }}>
               <div style={{ fontSize: '3rem', marginBottom: '10px' }}>📁</div>
               <h3>No orders assigned to you yet.</h3>
-              <p style={{ color: '#666' }}>Assigned orders will appear here automatically.</p>
+              <p style={{ color: 'var(--text-muted)' }}>Assigned orders will appear here automatically.</p>
             </div>
           ) : (
             <table>

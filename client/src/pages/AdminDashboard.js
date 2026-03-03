@@ -137,21 +137,21 @@ const AdminDashboard = () => {
           <div className="card" style={{ borderLeft: '5px solid var(--primary-color)' }}>
             <h3 style={{ marginTop: 0 }}>📊 Status Overview</h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '15px', marginBottom: '25px' }}>
-              <div style={{ background: 'var(--bg-color)', padding: '20px', borderRadius: '12px', textAlign: 'center', border: '1px solid var(--border-color)' }}>
+              <div style={{ background: '#fff5f5', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
                 <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#c53030' }}>{statusCounts['in progress'] || 0}</div>
                 <div style={{ fontSize: '0.85rem', color: '#c53030', fontWeight: 600 }}>In Progress</div>
               </div>
-              <div style={{ background: 'var(--bg-color)', padding: '20px', borderRadius: '12px', textAlign: 'center', border: '1px solid var(--border-color)' }}>
+              <div style={{ background: '#fff3cd', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
                 <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#856404' }}>{statusCounts['completed'] || 0}</div>
                 <div style={{ fontSize: '0.85rem', color: '#856404', fontWeight: 600 }}>Completed</div>
               </div>
-              <div style={{ background: 'var(--bg-color)', padding: '20px', borderRadius: '12px', textAlign: 'center', border: '1px solid var(--border-color)' }}>
+              <div style={{ background: '#f0fff4', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
                 <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#276749' }}>{statusCounts['delivered'] || 0}</div>
                 <div style={{ fontSize: '0.85rem', color: '#276749', fontWeight: 600 }}>Delivered</div>
               </div>
-              <div style={{ background: 'var(--bg-color)', padding: '20px', borderRadius: '12px', textAlign: 'center', border: '1px solid var(--border-color)' }}>
+              <div style={{ background: 'var(--feature-card-bg)', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
                 <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--text-main)' }}>{orders.length}</div>
-                <div style={{ fontSize: '0.85rem', color: '#666', fontWeight: 600 }}>Total Orders</div>
+                <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>Total Orders</div>
               </div>
             </div>
 
@@ -172,7 +172,7 @@ const AdminDashboard = () => {
                     </tr>
                   ))}
                   {Object.keys(tailorCounts).length === 0 && (
-                    <tr><td colSpan="2" style={{ textAlign: 'center', color: '#999' }}>No data yet</td></tr>
+                    <tr><td colSpan="2" style={{ textAlign: 'center', color: 'var(--text-muted)' }}>No data yet</td></tr>
                   )}
                 </tbody>
               </table>
@@ -184,7 +184,7 @@ const AdminDashboard = () => {
         {showTailorPanel && (
           <div className="card" style={{ borderLeft: '5px solid #333' }}>
             <h3 style={{ marginTop: 0 }}>Add New Tailor</h3>
-            <p style={{ color: '#666', fontSize: '0.9rem' }}>The tailor will use the password below to access their dashboard.</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>The tailor will use the password below to access their dashboard.</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
               <div>
                 <label>Tailor Name</label>
@@ -278,7 +278,7 @@ const AdminDashboard = () => {
 
             <div className="table-container">
               {sortedOrders.length === 0 ? (
-                <div style={{ padding: '40px', textAlign: 'center', color: '#999' }}>No orders found in the system.</div>
+                <div style={{ padding: '40px', textAlign: 'center', color: 'var(--text-muted)' }}>No orders found in the system.</div>
               ) : (
                 <table>
                   <thead>
@@ -312,7 +312,7 @@ const AdminDashboard = () => {
                             Edit
                           </button>
                           <button
-                            style={{ padding: '6px 12px', fontSize: '0.8rem', backgroundColor: 'transparent', border: '1px solid var(--border-color)', color: 'var(--primary-color)' }}
+                            style={{ padding: '6px 12px', fontSize: '0.8rem', backgroundColor: 'var(--delete-btn-bg)', color: 'var(--primary-color)' }}
                             onClick={() => confirmDelete(order)}
                           >
                             Delete
@@ -333,10 +333,10 @@ const AdminDashboard = () => {
         <div className="modal-overlay">
           <div className="modal-box">
             <h3>⚠️ Confirm Deletion</h3>
-            <p style={{ margin: '15px 0', color: '#555' }}>
+            <p style={{ margin: '15px 0' }}>
               Are you sure you want to permanently delete this order?
             </p>
-            <div style={{ background: 'var(--bg-color)', border: '1px solid var(--border-color)', padding: '15px', borderRadius: '8px', margin: '15px 0', textAlign: 'left', color: 'var(--text-main)' }}>
+            <div style={{ background: 'var(--modal-detail-bg)', padding: '15px', borderRadius: '8px', margin: '15px 0', textAlign: 'left' }}>
               <p style={{ margin: '4px 0' }}><strong>Order No:</strong> #{deleteTarget.orderNo}</p>
               <p style={{ margin: '4px 0' }}><strong>Tailor:</strong> {deleteTarget.tailor}</p>
               <p style={{ margin: '4px 0' }}><strong>Status:</strong> {deleteTarget.status}</p>

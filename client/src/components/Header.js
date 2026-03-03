@@ -7,13 +7,13 @@ const Header = ({ title, role }) => (
     backgroundColor: 'var(--primary-color)',
     color: 'white',
     textAlign: 'center',
-    boxShadow: 'var(--shadow)',
+    boxShadow: '0 4px 12px rgba(var(--primary-rgb),0.25)',
     borderBottomLeftRadius: '25px',
     borderBottomRightRadius: '25px',
     marginBottom: '30px',
     position: 'relative'
   }}>
-    <h1 style={{ margin: 0, fontSize: '2.4rem', letterSpacing: '1px' }}>{title}</h1>
+    <h1 style={{ margin: 0, fontSize: '2.4rem', letterSpacing: '1px', color: 'white' }}>{title}</h1>
     <div className="brand-subtitle">Matchfit Tailoring LLC</div>
     {role && (
       <span style={{
