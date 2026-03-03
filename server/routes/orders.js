@@ -51,8 +51,16 @@ router.post('/add', (req, res) => {
 // Update order
 router.put('/update/:orderNo', (req, res) => {
     const { type, tailor, dueDate, status } = req.body;
+    let formattedDate = dueDate;
+    if (dueDate) {
+        try {
+            formattedDate = new Date(dueDate).toISOString().split('T')[0];
+        } catch (e) {
+            formattedDate = dueDate;
+        }
+    }
     const query = `UPDATE orders SET type=?, tailor=?, dueDate=?, status=? WHERE orderNo=?`;
-    db.query(query, [type, tailor, dueDate, status, req.params.orderNo], (err) => {
+    db.query(query, [type, tailor, formattedDate, status, req.params.orderNo], (err) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json({ message: 'Order updated' });
     });
