@@ -14,6 +14,7 @@ const Header = ({ title, role }) => (
     position: 'relative'
   }}>
     <h1 style={{ margin: 0, fontSize: '2.4rem', letterSpacing: '1px' }}>{title}</h1>
+    <div className="brand-subtitle">Matchfit Tailoring LLC</div>
     {role && (
       <span style={{
         position: 'absolute',

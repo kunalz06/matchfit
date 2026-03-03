@@ -10,6 +10,8 @@ const AdminDashboard = () => {
   const [sortOrder, setSortOrder] = useState('asc');
   const [editOrder, setEditOrder] = useState(null);
   const [showTailorPanel, setShowTailorPanel] = useState(false);
+  const [showOverview, setShowOverview] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState(null);
   const [newTailor, setNewTailor] = useState({ name: '', password: '' });
 
   const [newOrder, setNewOrder] = useState({
@@ -44,10 +46,15 @@ const AdminDashboard = () => {
     return 0;
   });
 
-  const deleteOrder = async (orderNo) => {
-    if (!window.confirm(`Are you sure you want to delete order ${orderNo}?`)) return;
+  const confirmDelete = (order) => {
+    setDeleteTarget(order);
+  };
+
+  const executeDelete = async () => {
+    if (!deleteTarget) return;
     try {
-      await axios.delete(`http://localhost:5000/api/orders/delete/${orderNo}`);
+      await axios.delete(`http://localhost:5000/api/orders/delete/${deleteTarget.orderNo}`);
+      setDeleteTarget(null);
       fetchOrders();
     } catch (err) {
       alert('Failed to delete: ' + err.message);
@@ -89,24 +96,89 @@ const AdminDashboard = () => {
     }
   };
 
+  // Analytics helpers
+  const statusCounts = orders.reduce((acc, o) => {
+    acc[o.status] = (acc[o.status] || 0) + 1;
+    return acc;
+  }, {});
+
+  const tailorCounts = orders.reduce((acc, o) => {
+    acc[o.tailor] = (acc[o.tailor] || 0) + 1;
+    return acc;
+  }, {});
+
   return (
     <div style={{ paddingBottom: '50px' }}>
       <Header title="Admin Dashboard" role="Administrator" />
 
       <div className="container">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', flexWrap: 'wrap', gap: '10px' }}>
           <button onClick={() => navigate('/')} className="secondary">🏠 Home</button>
 
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
             <button
-              onClick={() => setShowTailorPanel(!showTailorPanel)}
+              onClick={() => { setShowOverview(!showOverview); setShowTailorPanel(false); }}
+              style={{ backgroundColor: showOverview ? '#b11226' : '#555' }}
+            >
+              📊 {showOverview ? 'Hide Overview' : 'Status Overview'}
+            </button>
+            <button
+              onClick={() => { setShowTailorPanel(!showTailorPanel); setShowOverview(false); }}
               style={{ backgroundColor: '#333' }}
             >
               👤 {showTailorPanel ? 'View Orders' : 'Manage Tailors'}
             </button>
-            <button onClick={() => { setShowTailorPanel(false); setEditOrder({}); }}>+ Add Order</button>
+            <button onClick={() => { setShowTailorPanel(false); setShowOverview(false); setEditOrder({}); }}>+ Add Order</button>
           </div>
         </div>
+
+        {/* Status Overview Panel */}
+        {showOverview && (
+          <div className="card" style={{ borderLeft: '5px solid #b11226' }}>
+            <h3 style={{ marginTop: 0 }}>📊 Status Overview</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '15px', marginBottom: '25px' }}>
+              <div style={{ background: '#fff5f5', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
+                <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#c53030' }}>{statusCounts['in progress'] || 0}</div>
+                <div style={{ fontSize: '0.85rem', color: '#c53030', fontWeight: 600 }}>In Progress</div>
+              </div>
+              <div style={{ background: '#fff3cd', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
+                <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#856404' }}>{statusCounts['completed'] || 0}</div>
+                <div style={{ fontSize: '0.85rem', color: '#856404', fontWeight: 600 }}>Completed</div>
+              </div>
+              <div style={{ background: '#f0fff4', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
+                <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#276749' }}>{statusCounts['delivered'] || 0}</div>
+                <div style={{ fontSize: '0.85rem', color: '#276749', fontWeight: 600 }}>Delivered</div>
+              </div>
+              <div style={{ background: '#f8f9fa', padding: '20px', borderRadius: '12px', textAlign: 'center' }}>
+                <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#333' }}>{orders.length}</div>
+                <div style={{ fontSize: '0.85rem', color: '#666', fontWeight: 600 }}>Total Orders</div>
+              </div>
+            </div>
+
+            <h4 style={{ marginBottom: '10px' }}>Orders by Tailor</h4>
+            <div className="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Tailor</th>
+                    <th>Total Orders</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.entries(tailorCounts).map(([tailor, count]) => (
+                    <tr key={tailor}>
+                      <td style={{ fontWeight: 'bold' }}>{tailor}</td>
+                      <td>{count}</td>
+                    </tr>
+                  ))}
+                  {Object.keys(tailorCounts).length === 0 && (
+                    <tr><td colSpan="2" style={{ textAlign: 'center', color: '#999' }}>No data yet</td></tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
 
         {/* Manage Tailors Panel */}
         {showTailorPanel && (
@@ -138,8 +210,8 @@ const AdminDashboard = () => {
           </div>
         )}
 
-        {/* Order Sorting & Table (Original Logic) */}
-        {!showTailorPanel && (
+        {/* Order Sorting & Table */}
+        {!showTailorPanel && !showOverview && (
           <>
             <div className="card" style={{ padding: '15px 30px', marginBottom: '20px', display: 'flex', gap: '15px', alignItems: 'center' }}>
               <span style={{ fontWeight: 'bold' }}>Quick Sort:</span>
@@ -241,7 +313,7 @@ const AdminDashboard = () => {
                           </button>
                           <button
                             style={{ padding: '6px 12px', fontSize: '0.8rem', backgroundColor: '#ffe3e6', color: '#b11226' }}
-                            onClick={() => deleteOrder(order.orderNo)}
+                            onClick={() => confirmDelete(order)}
                           >
                             Delete
                           </button>
@@ -255,6 +327,27 @@ const AdminDashboard = () => {
           </>
         )}
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {deleteTarget && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>⚠️ Confirm Deletion</h3>
+            <p style={{ margin: '15px 0', color: '#555' }}>
+              Are you sure you want to permanently delete this order?
+            </p>
+            <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', margin: '15px 0', textAlign: 'left' }}>
+              <p style={{ margin: '4px 0' }}><strong>Order No:</strong> #{deleteTarget.orderNo}</p>
+              <p style={{ margin: '4px 0' }}><strong>Tailor:</strong> {deleteTarget.tailor}</p>
+              <p style={{ margin: '4px 0' }}><strong>Status:</strong> {deleteTarget.status}</p>
+            </div>
+            <div className="modal-actions">
+              <button className="secondary" onClick={() => setDeleteTarget(null)}>Cancel</button>
+              <button style={{ backgroundColor: '#c53030' }} onClick={executeDelete}>Delete Order</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
