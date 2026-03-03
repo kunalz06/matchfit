@@ -7,10 +7,12 @@ import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import TailorLogin from './pages/TailorLogin';
 import TailorDashboard from './pages/TailorDashboard';
+import ThemeToggle from './components/ThemeToggle';
 
 function App() {
   return (
     <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <ThemeToggle />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/customer" element={<Customer />} />
@@ -25,3 +27,4 @@ function App() {
 }
 
 export default App;
+

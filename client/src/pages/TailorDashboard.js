@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
@@ -8,30 +8,32 @@ const TailorDashboard = () => {
   const tailorName = localStorage.getItem('tailorName');
   const [orders, setOrders] = useState([]);
   const [sortField, setSortField] = useState('dueDate');
-  const [sortOrder, setSortOrder] = useState('asc');
   const [statusUpdate, setStatusUpdate] = useState({});
   const navigate = useNavigate();
 
-  const fetchOrders = async () => {
+  const fetchOrders = useCallback(async () => {
     try {
       const res = await axios.get(`http://localhost:5000/api/orders/tailor/${tailorName}`);
       setOrders(res.data);
     } catch (err) {
       alert('Failed to fetch orders: ' + err.message);
     }
-  };
+  }, [tailorName]);
 
   useEffect(() => {
-    if (!tailorName) navigate('/tailor-login');
+    if (!tailorName) {
+      navigate('/tailor-login');
+      return;
+    }
     fetchOrders();
-  }, []);
+  }, [tailorName, navigate, fetchOrders]);
 
   const sortedOrders = [...orders].sort((a, b) => {
     if (!sortField) return 0;
     let valA = a[sortField], valB = b[sortField];
     if (sortField === 'dueDate') { valA = new Date(valA); valB = new Date(valB); }
-    if (valA < valB) return sortOrder === 'asc' ? -1 : 1;
-    if (valA > valB) return sortOrder === 'asc' ? 1 : -1;
+    if (valA < valB) return -1;
+    if (valA > valB) return 1;
     return 0;
   });
 
