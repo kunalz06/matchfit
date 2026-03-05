@@ -1,37 +1,37 @@
-/* ===== Light Mode (Default — Whitish Pink + Reddish Pink) ===== */
+/* ===== Light Mode (Modern Crisp White + F1 Red Accents) ===== */
 :root {
-  --primary-color: #e11d48;
-  --primary-hover: #be123c;
-  --primary-rgb: 225, 29, 72;
-  --bg-color: #fff1f3;
-  --bg-gradient-start: #fff1f3;
-  --bg-gradient-end: #ffe4e6;
+  --primary-color: #e10600;
+  --primary-hover: #b00500;
+  --primary-rgb: 225, 6, 0;
+  --bg-color: #f4f5f7;
+  --bg-gradient-start: #f4f5f7;
+  --bg-gradient-end: #eaedf1;
   --card-bg: #ffffff;
-  --text-main: #1a202c;
-  --text-muted: #4a5568;
-  --text-secondary: #2d3748;
-  --border-color: #fed7e2;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --text-secondary: #4b5563;
+  --border-color: #e5e7eb;
   --input-bg: #ffffff;
-  --input-border: #fed7e2;
-  --hover-row: #fff5f7;
-  --feature-card-bg: #fff5f7;
+  --input-border: #d1d5db;
+  --hover-row: #f9fafb;
+  --feature-card-bg: #f3f4f6;
   --modal-bg: #ffffff;
-  --modal-detail-bg: #fff5f7;
-  --login-shadow: 20px 20px 60px #e6d3d7, -20px -20px 60px #ffffff;
-  --login-border: #fed7e2;
-  --back-link-color: #718096;
-  --delete-btn-bg: #ffe3e6;
-  --status-pending-bg: #fff5f5;
-  --status-pending-text: #c53030;
-  --status-pending-border: #feb2b2;
-  --status-completed-bg: #fff3cd;
-  --status-completed-text: #856404;
-  --status-completed-border: #ffc107;
-  --status-delivered-bg: #f0fff4;
-  --status-delivered-text: #276749;
-  --status-delivered-border: #9ae6b4;
+  --modal-detail-bg: #f9fafb;
+  --login-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --login-border: #e5e7eb;
+  --back-link-color: #6b7280;
+  --delete-btn-bg: #fee2e2;
+  --status-pending-bg: #fef2f2;
+  --status-pending-text: #dc2626;
+  --status-pending-border: #fecaca;
+  --status-completed-bg: #fefce8;
+  --status-completed-text: #b45309;
+  --status-completed-border: #fef08a;
+  --status-delivered-bg: #f0fdf4;
+  --status-delivered-text: #166534;
+  --status-delivered-border: #bbf7d0;
   --border-radius: 12px;
-  --shadow: 0 4px 20px rgba(225, 29, 72, 0.06);
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   --transition: all 0.3s ease;
 }
 
