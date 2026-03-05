@@ -1,25 +1,25 @@
-/* ===== Light Mode (Modern Crisp White + F1 Red Accents) ===== */
+/* ===== Light Mode ===== */
 :root {
-  --primary-color: #e10600;
-  --primary-hover: #b00500;
-  --primary-rgb: 225, 6, 0;
-  --bg-color: #f4f5f7;
-  --bg-gradient-start: #f4f5f7;
-  --bg-gradient-end: #eaedf1;
-  --card-bg: #ffffff;
+  --primary-color: #b08968;
+  --primary-hover: #9c7858;
+  --primary-rgb: 176, 137, 104;
+  --bg-color: #c9184a;
+  --bg-gradient-start: #c9184a;
+  --bg-gradient-end: #c9184a;
+  --card-bg: #ffccd5;
   --text-main: #1f2937;
-  --text-muted: #6b7280;
+  --text-muted: #6c757d;
   --text-secondary: #4b5563;
-  --border-color: #e5e7eb;
+  --border-color: #ffb3c1;
   --input-bg: #ffffff;
-  --input-border: #d1d5db;
-  --hover-row: #f9fafb;
-  --feature-card-bg: #f3f4f6;
-  --modal-bg: #ffffff;
-  --modal-detail-bg: #f9fafb;
+  --input-border: #ffb3c1;
+  --hover-row: #ffe4e8;
+  --feature-card-bg: #ffccd5;
+  --modal-bg: #ffccd5;
+  --modal-detail-bg: #ffe4e8;
   --login-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  --login-border: #e5e7eb;
-  --back-link-color: #6b7280;
+  --login-border: #ffb3c1;
+  --back-link-color: #ffccd5;
   --delete-btn-bg: #fee2e2;
   --status-pending-bg: #fef2f2;
   --status-pending-text: #dc2626;
@@ -31,80 +31,80 @@
   --status-delivered-text: #166534;
   --status-delivered-border: #bbf7d0;
   --border-radius: 12px;
-  --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s ease;
 }
 
-/* ===== Dark Mode (Night — Dark Background + Dark Red) ===== */
+/* ===== Dark Mode ===== */
 @media (prefers-color-scheme: dark) {
   :root:not(.light-mode) {
-    --primary-color: #b11226;
-    --primary-hover: #8e0e1e;
-    --primary-rgb: 177, 18, 38;
-    --bg-color: #121212;
-    --bg-gradient-start: #121212;
-    --bg-gradient-end: #1a1a1a;
-    --card-bg: #1e1e1e;
-    --text-main: #f0f0f0;
-    --text-muted: #aaaaaa;
-    --text-secondary: #bbbbbb;
-    --border-color: #333333;
-    --input-bg: #2a2a2a;
-    --input-border: #444444;
-    --hover-row: #262626;
-    --feature-card-bg: #252525;
-    --modal-bg: #1e1e1e;
-    --modal-detail-bg: #2a2a2a;
-    --login-shadow: 20px 20px 60px #0a0a0a, -20px -20px 60px #252525;
-    --login-border: #333333;
-    --back-link-color: #999;
-    --delete-btn-bg: #3d1519;
-    --status-pending-bg: rgba(197, 48, 48, 0.15);
-    --status-pending-text: #fc8181;
-    --status-pending-border: rgba(197, 48, 48, 0.3);
-    --status-completed-bg: rgba(133, 100, 4, 0.2);
-    --status-completed-text: #f6e05e;
-    --status-completed-border: rgba(133, 100, 4, 0.3);
-    --status-delivered-bg: rgba(39, 103, 73, 0.2);
-    --status-delivered-text: #68d391;
-    --status-delivered-border: rgba(39, 103, 73, 0.3);
-    --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --primary-color: #fb6f92;
+    --primary-hover: #f05e83;
+    --primary-rgb: 251, 111, 146;
+    --bg-color: #ffc2d1;
+    --bg-gradient-start: #ffc2d1;
+    --bg-gradient-end: #ffb3c1;
+    --card-bg: #f8f9fa;
+    --text-main: #1f2937;
+    --text-muted: #4b5563;
+    --text-secondary: #374151;
+    --border-color: #fb6f92;
+    --input-bg: #ffffff;
+    --input-border: #fb6f92;
+    --hover-row: #f1f3f5;
+    --feature-card-bg: #ffffff;
+    --modal-bg: #f8f9fa;
+    --modal-detail-bg: #f1f3f5;
+    --login-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    --login-border: #fb6f92;
+    --back-link-color: #4b5563;
+    --delete-btn-bg: #fee2e2;
+    --status-pending-bg: rgba(220, 38, 38, 0.15);
+    --status-pending-text: #dc2626;
+    --status-pending-border: rgba(220, 38, 38, 0.3);
+    --status-completed-bg: rgba(180, 83, 9, 0.15);
+    --status-completed-text: #b45309;
+    --status-completed-border: rgba(180, 83, 9, 0.3);
+    --status-delivered-bg: rgba(22, 101, 52, 0.15);
+    --status-delivered-text: #166534;
+    --status-delivered-border: rgba(22, 101, 52, 0.3);
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   }
 }
 
 /* Manual dark mode override via toggle button */
 :root.dark-mode {
-  --primary-color: #b11226;
-  --primary-hover: #8e0e1e;
-  --primary-rgb: 177, 18, 38;
-  --bg-color: #121212;
-  --bg-gradient-start: #121212;
-  --bg-gradient-end: #1a1a1a;
-  --card-bg: #1e1e1e;
-  --text-main: #f0f0f0;
-  --text-muted: #aaaaaa;
-  --text-secondary: #bbbbbb;
-  --border-color: #333333;
-  --input-bg: #2a2a2a;
-  --input-border: #444444;
-  --hover-row: #262626;
-  --feature-card-bg: #252525;
-  --modal-bg: #1e1e1e;
-  --modal-detail-bg: #2a2a2a;
-  --login-shadow: 20px 20px 60px #0a0a0a, -20px -20px 60px #252525;
-  --login-border: #333333;
-  --back-link-color: #999;
-  --delete-btn-bg: #3d1519;
-  --status-pending-bg: rgba(197, 48, 48, 0.15);
-  --status-pending-text: #fc8181;
-  --status-pending-border: rgba(197, 48, 48, 0.3);
-  --status-completed-bg: rgba(133, 100, 4, 0.2);
-  --status-completed-text: #f6e05e;
-  --status-completed-border: rgba(133, 100, 4, 0.3);
-  --status-delivered-bg: rgba(39, 103, 73, 0.2);
-  --status-delivered-text: #68d391;
-  --status-delivered-border: rgba(39, 103, 73, 0.3);
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --primary-color: #fb6f92;
+  --primary-hover: #f05e83;
+  --primary-rgb: 251, 111, 146;
+  --bg-color: #ffc2d1;
+  --bg-gradient-start: #ffc2d1;
+  --bg-gradient-end: #ffb3c1;
+  --card-bg: #f8f9fa;
+  --text-main: #1f2937;
+  --text-muted: #4b5563;
+  --text-secondary: #374151;
+  --border-color: #fb6f92;
+  --input-bg: #ffffff;
+  --input-border: #fb6f92;
+  --hover-row: #f1f3f5;
+  --feature-card-bg: #ffffff;
+  --modal-bg: #f8f9fa;
+  --modal-detail-bg: #f1f3f5;
+  --login-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  --login-border: #fb6f92;
+  --back-link-color: #4b5563;
+  --delete-btn-bg: #fee2e2;
+  --status-pending-bg: rgba(220, 38, 38, 0.15);
+  --status-pending-text: #dc2626;
+  --status-pending-border: rgba(220, 38, 38, 0.3);
+  --status-completed-bg: rgba(180, 83, 9, 0.15);
+  --status-completed-text: #b45309;
+  --status-completed-border: rgba(180, 83, 9, 0.3);
+  --status-delivered-bg: rgba(22, 101, 52, 0.15);
+  --status-delivered-text: #166534;
+  --status-delivered-border: rgba(22, 101, 52, 0.3);
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 body {

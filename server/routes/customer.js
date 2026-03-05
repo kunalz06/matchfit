@@ -11,7 +11,7 @@ router.get("/track/:order_no", async (req, res) => {
   const { order_no } = req.params;
   try {
     const results = await dbQuery(
-      "SELECT orderNo, status FROM orders WHERE orderNo = ?",
+      "SELECT * FROM orders WHERE orderNo = ?",
       [order_no]
     );
     if (results.length === 0) {

@@ -7,6 +7,7 @@ import '../styles/styles.css';
 const TrackOrder = () => {
   const [orderNo, setOrderNo] = useState('');
   const [status, setStatus] = useState('');
+  const [orderDetails, setOrderDetails] = useState(null);
   const [loading, setLoading] = useState(false);
   const [started, setStarted] = useState(false);
   const navigate = useNavigate();
@@ -15,11 +16,14 @@ const TrackOrder = () => {
     if (!orderNo) return;
     setLoading(true);
     setStatus('');
+    setOrderDetails(null);
     try {
       const res = await axios.get(`http://localhost:5000/api/customer/track/${orderNo}`);
       setStatus(res.data.status);
+      setOrderDetails(res.data);
     } catch (err) {
       setStatus('Order not found');
+      setOrderDetails(null);
     } finally {
       setLoading(false);
     }
@@ -81,23 +85,61 @@ const TrackOrder = () => {
           </div>
 
           {status && (
-            <div style={{
-              padding: '25px',
-              borderRadius: '12px',
-              backgroundColor: statusStyle.bg,
-              border: `1px solid ${statusStyle.border}`
-            }}>
-              <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', display: 'block', marginBottom: '5px' }}>
-                Current Progress:
-              </span>
-              <h2 style={{
-                margin: 0,
-                color: statusStyle.color,
-                textTransform: 'uppercase',
-                letterSpacing: '1px'
+            <div>
+              <div style={{
+                padding: '25px',
+                borderRadius: '12px',
+                backgroundColor: statusStyle.bg,
+                border: `1px solid ${statusStyle.border}`,
+                marginBottom: orderDetails && status !== 'Order not found' ? '20px' : '0'
               }}>
-                {status}
-              </h2>
+                <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', display: 'block', marginBottom: '5px' }}>
+                  Current Progress:
+                </span>
+                <h2 style={{
+                  margin: 0,
+                  color: statusStyle.color,
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px'
+                }}>
+                  {status}
+                </h2>
+              </div>
+
+              {orderDetails && status !== 'Order not found' && (
+                <div style={{
+                  padding: '20px',
+                  borderRadius: '12px',
+                  backgroundColor: 'var(--feature-card-bg)',
+                  border: `1px solid var(--border-color)`,
+                  textAlign: 'left'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                    <span style={{ color: 'var(--text-muted)', fontWeight: 'bold' }}>Order Date:</span>
+                    <span style={{ color: 'var(--text-main)' }}>
+                      {orderDetails.orderDate
+                        ? new Date(orderDetails.orderDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+                        : 'N/A'
+                      }
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                    <span style={{ color: 'var(--text-muted)', fontWeight: 'bold' }}>Due Date:</span>
+                    <span style={{ color: 'var(--text-main)' }}>
+                      {orderDetails.dueDate
+                        ? new Date(orderDetails.dueDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+                        : 'N/A'
+                      }
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span style={{ color: 'var(--text-muted)', fontWeight: 'bold' }}>Assigned Tailor:</span>
+                    <span style={{ color: 'var(--text-main)' }}>
+                      {orderDetails.tailor || 'Unassigned'}
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
