@@ -67,7 +67,7 @@ const TailorLogin = () => {
             placeholder={t.placeholder}
             value={password}
             onChange={e => setPassword(e.target.value)}
-            onKeyPress={e => e.key === 'Enter' && login()}
+            onKeyDown={e => e.key === 'Enter' && login()}
           />
         </div>
 

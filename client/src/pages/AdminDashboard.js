@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import '../styles/styles.css';
+
+const initialNewOrderState = {
+  orderNo: '',
+  type: 'stitching',
+  tailor: '',
+  dueDate: '',
+  status: 'in progress'
+};
 
 const AdminDashboard = () => {
   const [orders, setOrders] = useState([]);
@@ -10,6 +18,8 @@ const AdminDashboard = () => {
   const [sortField, setSortField] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
   const [editOrder, setEditOrder] = useState(null);
+  const [isAddingOrder, setIsAddingOrder] = useState(false);
+  const [newOrder, setNewOrder] = useState(initialNewOrderState);
   const [showTailorPanel, setShowTailorPanel] = useState(false);
   const [showOverview, setShowOverview] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null);
@@ -17,38 +27,30 @@ const AdminDashboard = () => {
   const [editTailor, setEditTailor] = useState(null);
   const [newTailor, setNewTailor] = useState({ name: '', password: '' });
 
-  const [newOrder, setNewOrder] = useState({
-    orderNo: '',
-    type: 'stitching',
-    tailor: '',
-    dueDate: '',
-    status: 'in progress'
-  });
-
   const navigate = useNavigate();
 
-  const fetchOrders = async () => {
+  const fetchOrders = useCallback(async () => {
     try {
       const res = await axios.get('http://localhost:5000/api/orders/all');
       setOrders(res.data);
     } catch (err) {
       alert('Failed to fetch orders: ' + err.message);
     }
-  };
+  }, []);
 
-  const fetchTailors = async () => {
+  const fetchTailors = useCallback(async () => {
     try {
       const res = await axios.get('http://localhost:5000/api/auth/tailors');
       setTailorsList(res.data);
     } catch (err) {
       console.error('Failed to fetch tailors:', err.message);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchOrders();
     fetchTailors();
-  }, []);
+  }, [fetchOrders, fetchTailors]);
 
   const sortedOrders = [...orders].sort((a, b) => {
     if (!sortField) return 0;
@@ -58,10 +60,6 @@ const AdminDashboard = () => {
     if (valA > valB) return sortOrder === 'asc' ? 1 : -1;
     return 0;
   });
-
-  const confirmDelete = (order) => {
-    setDeleteTarget(order);
-  };
 
   const executeDelete = async () => {
     if (!deleteTarget) return;
@@ -75,6 +73,7 @@ const AdminDashboard = () => {
   };
 
   const saveEdit = async () => {
+    if (!editOrder) return;
     try {
       await axios.put(`http://localhost:5000/api/orders/update/${editOrder.orderNo}`, editOrder);
       setEditOrder(null);
@@ -87,12 +86,25 @@ const AdminDashboard = () => {
   const addOrder = async () => {
     try {
       await axios.post(`http://localhost:5000/api/orders/add`, newOrder);
-      setNewOrder({ orderNo: '', type: 'stitching', tailor: '', dueDate: '', status: 'in progress' });
-      setEditOrder(null);
+      setNewOrder(initialNewOrderState);
+      setIsAddingOrder(false);
       fetchOrders();
     } catch (err) {
       alert(err.response?.data?.error || 'Failed to add order: ' + err.message);
     }
+  };
+
+  const handleOpenAddOrder = () => {
+    setEditOrder(null);
+    setShowTailorPanel(false);
+    setShowOverview(false);
+    setIsAddingOrder(true);
+  };
+
+  const handleCancelOrderForm = () => {
+    setEditOrder(null);
+    setIsAddingOrder(false);
+    setNewOrder(initialNewOrderState);
   };
 
   // ---- Tailor Management ----
@@ -147,6 +159,67 @@ const AdminDashboard = () => {
     return acc;
   }, {});
 
+  const OrderForm = ({ order, onChange, onSave, onCancel }) => {
+    const isEditing = !!order?.orderNo;
+    const title = isEditing ? `Editing Order #${order.orderNo}` : 'New Order Details';
+    const data = isEditing ? order : newOrder;
+
+    const handleChange = (e) => {
+      onChange({ ...data, [e.target.name]: e.target.value });
+    };
+
+    return (
+      <div className="card" style={{ borderLeft: '5px solid var(--primary-color)' }}>
+        <h3 style={{ marginTop: 0 }}>{title}</h3>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '15px' }}>
+          <div>
+            <label>Order Number</label>
+            <input
+              name="orderNo"
+              disabled={isEditing}
+              placeholder="Order No"
+              value={data.orderNo}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label>Service Type</label>
+            <select name="type" value={data.type} onChange={handleChange}>
+              <option value="stitching">Stitching</option>
+              <option value="alteration">Alteration</option>
+              <option value="designing">Designing</option>
+            </select>
+          </div>
+          <div>
+            <label>Assigned Tailor</label>
+            <select name="tailor" value={data.tailor} onChange={handleChange}>
+              <option value="">-- Select Tailor --</option>
+              {tailorsList.map(t => (
+                <option key={t.id} value={t.name}>{t.name}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label>Due Date</label>
+            <input type="date" name="dueDate" value={data.dueDate ? data.dueDate.substring(0, 10) : ''} onChange={handleChange} />
+          </div>
+          <div>
+            <label>Current Status</label>
+            <select name="status" value={data.status} onChange={handleChange}>
+              <option value="in progress">In Progress</option>
+              <option value="completed">Completed</option>
+              <option value="delivered">Delivered</option>
+            </select>
+          </div>
+        </div>
+        <div style={{ marginTop: '20px', textAlign: 'right' }}>
+          <button className="secondary" style={{ marginRight: '10px' }} onClick={onCancel}>Cancel</button>
+          <button onClick={onSave}>Save Order</button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div style={{ paddingBottom: '50px' }}>
       <Header title="Admin Dashboard" role="Administrator" />
@@ -168,7 +241,7 @@ const AdminDashboard = () => {
             >
               👤 {showTailorPanel ? 'View Orders' : 'Manage Tailors'}
             </button>
-            <button onClick={() => { setShowTailorPanel(false); setShowOverview(false); setEditOrder({}); }}>+ Add Order</button>
+            <button onClick={handleOpenAddOrder}>+ Add Order</button>
           </div>
         </div>
 
@@ -342,60 +415,22 @@ const AdminDashboard = () => {
               </select>
             </div>
 
-            {editOrder !== null && (
-              <div className="card" style={{ borderLeft: '5px solid var(--primary-color)' }}>
-                <h3 style={{ marginTop: 0 }}>{editOrder.orderNo ? `Editing Order #${editOrder.orderNo}` : 'New Order Details'}</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '15px' }}>
-                  <div>
-                    <label>Order Number</label>
-                    <input
-                      disabled={!!editOrder.orderNo}
-                      placeholder="Order No"
-                      value={editOrder.orderNo || newOrder.orderNo}
-                      onChange={e => editOrder.orderNo ? setEditOrder({ ...editOrder, orderNo: e.target.value }) : setNewOrder({ ...newOrder, orderNo: e.target.value })}
-                    />
-                  </div>
-                  <div>
-                    <label>Service Type</label>
-                    <select value={editOrder.type || newOrder.type}
-                      onChange={e => editOrder.type ? setEditOrder({ ...editOrder, type: e.target.value }) : setNewOrder({ ...newOrder, type: e.target.value })}>
-                      <option value="stitching">Stitching</option>
-                      <option value="alteration">Alteration</option>
-                      <option value="designing">Designing</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label>Assigned Tailor</label>
-                    <select
-                      value={editOrder.tailor || newOrder.tailor}
-                      onChange={e => editOrder.orderNo ? setEditOrder({ ...editOrder, tailor: e.target.value }) : setNewOrder({ ...newOrder, tailor: e.target.value })}
-                    >
-                      <option value="">-- Select Tailor --</option>
-                      {tailorsList.map(t => (
-                        <option key={t.id} value={t.name}>{t.name}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label>Due Date</label>
-                    <input type="date" value={editOrder.dueDate ? editOrder.dueDate.substring(0, 10) : newOrder.dueDate}
-                      onChange={e => editOrder.orderNo ? setEditOrder({ ...editOrder, dueDate: e.target.value }) : setNewOrder({ ...newOrder, dueDate: e.target.value })} />
-                  </div>
-                  <div>
-                    <label>Current Status</label>
-                    <select value={editOrder.status || newOrder.status}
-                      onChange={e => editOrder.status ? setEditOrder({ ...editOrder, status: e.target.value }) : setNewOrder({ ...newOrder, status: e.target.value })}>
-                      <option value="in progress">In Progress</option>
-                      <option value="completed">Completed</option>
-                      <option value="delivered">Delivered</option>
-                    </select>
-                  </div>
-                </div>
-                <div style={{ marginTop: '20px', textAlign: 'right' }}>
-                  <button className="secondary" style={{ marginRight: '10px' }} onClick={() => setEditOrder(null)}>Cancel</button>
-                  <button onClick={editOrder.orderNo ? saveEdit : addOrder}>Save Order</button>
-                </div>
-              </div>
+            {isAddingOrder && (
+              <OrderForm
+                order={null}
+                onChange={setNewOrder}
+                onSave={addOrder}
+                onCancel={handleCancelOrderForm}
+              />
+            )}
+
+            {editOrder && (
+              <OrderForm
+                order={editOrder}
+                onChange={setEditOrder}
+                onSave={saveEdit}
+                onCancel={handleCancelOrderForm}
+              />
             )}
 
             <div className="table-container">
@@ -435,7 +470,7 @@ const AdminDashboard = () => {
                           </button>
                           <button
                             style={{ padding: '6px 12px', fontSize: '0.8rem', backgroundColor: 'var(--delete-btn-bg)', color: 'var(--primary-color)' }}
-                            onClick={() => confirmDelete(order)}
+                            onClick={() => setDeleteTarget(order)}
                           >
                             Delete
                           </button>

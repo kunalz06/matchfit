@@ -12,6 +12,7 @@ const TailorDashboard = () => {
   const navigate = useNavigate();
 
   const fetchOrders = useCallback(async () => {
+    if (!tailorName) return;
     try {
       const res = await axios.get(`http://localhost:5000/api/orders/tailor/${tailorName}`);
       setOrders(res.data);
@@ -37,20 +38,23 @@ const TailorDashboard = () => {
     return 0;
   });
 
-  const updateStatus = async (orderNo) => {
-    if (!statusUpdate[orderNo]) return;
+  const updateStatus = useCallback(async (orderNo) => {
+    const newStatus = statusUpdate[orderNo];
     const order = orders.find(o => o.orderNo === orderNo);
+
+    if (!newStatus || newStatus === order.status) return;
+
     try {
       await axios.put(`http://localhost:5000/api/orders/update/${orderNo}`, {
         ...order,
-        status: statusUpdate[orderNo]
+        status: newStatus
       });
       fetchOrders();
       alert('Status updated successfully');
     } catch (err) {
       alert('Failed to update: ' + err.message);
     }
-  };
+  }, [statusUpdate, orders, fetchOrders]);
 
   return (
     <div style={{ paddingBottom: '50px' }}>

@@ -73,7 +73,7 @@ const TrackOrder = () => {
               value={orderNo}
               onChange={e => setOrderNo(e.target.value)}
               style={{ margin: 0 }}
-              onKeyPress={(e) => e.key === 'Enter' && trackOrder()}
+              onKeyDown={(e) => e.key === 'Enter' && trackOrder()}
             />
             <button onClick={trackOrder} disabled={loading} style={{ whiteSpace: 'nowrap' }}>
               {loading ? 'Searching...' : 'Track Order'}
