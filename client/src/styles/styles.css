@@ -1,135 +1,321 @@
-/* ===== Light Mode ===== */
+/* ============================================
+   MatchFit - Tailoring Order Management System
+   Enhanced Dark Mode with Proper Contrast
+   ============================================ */
+
+/* ===== Light Mode (Default) ===== */
 :root {
-  --primary-color: #b08968;
-  --primary-hover: #9c7858;
-  --primary-rgb: 176, 137, 104;
-  --bg-color: #c9184a;
-  --bg-gradient-start: #c9184a;
-  --bg-gradient-end: #c9184a;
-  --card-bg: #ffccd5;
+  /* Primary Brand Colors */
+  --primary-color: #c9184a;
+  --primary-hover: #a1143d;
+  --primary-rgb: 201, 24, 74;
+  --primary-light: #ff4d6d;
+  
+  /* Background Colors */
+  --bg-color: #fdf2f4;
+  --bg-gradient-start: #fdf2f4;
+  --bg-gradient-end: #ffe8ec;
+  
+  /* Surface/Card Colors */
+  --card-bg: #ffffff;
+  --card-border: #fce4e8;
+  
+  /* Text Colors */
   --text-main: #1f2937;
-  --text-muted: #6c757d;
   --text-secondary: #4b5563;
-  --border-color: #ffb3c1;
+  --text-muted: #6b7280;
+  --text-inverse: #ffffff;
+  
+  /* Input Colors */
   --input-bg: #ffffff;
-  --input-border: #ffb3c1;
-  --hover-row: #ffe4e8;
-  --feature-card-bg: #ffccd5;
-  --modal-bg: #ffccd5;
-  --modal-detail-bg: #ffe4e8;
-  --login-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  --login-border: #ffb3c1;
-  --back-link-color: #ffccd5;
-  --delete-btn-bg: #fee2e2;
-  --status-pending-bg: #fef2f2;
-  --status-pending-text: #dc2626;
-  --status-pending-border: #fecaca;
-  --status-completed-bg: #fefce8;
+  --input-border: #f9a8ba;
+  --input-focus-border: #c9184a;
+  --input-placeholder: #9ca3af;
+  
+  /* Border & Divider */
+  --border-color: #fce4e8;
+  --divider-color: #f3f4f6;
+  
+  /* Interactive States */
+  --hover-row: #fff5f7;
+  --active-row: #ffe8ec;
+  
+  /* Feature Cards */
+  --feature-card-bg: #fdf2f4;
+  
+  /* Modal Colors */
+  --modal-bg: #ffffff;
+  --modal-overlay: rgba(0, 0, 0, 0.5);
+  --modal-detail-bg: #fdf2f4;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  
+  /* Status Colors - Light Mode */
+  --status-progress-bg: #fef2f2;
+  --status-progress-text: #b91c1c;
+  --status-progress-border: #fecaca;
+  
+  --status-completed-bg: #fffbeb;
   --status-completed-text: #b45309;
-  --status-completed-border: #fef08a;
-  --status-delivered-bg: #f0fdf4;
-  --status-delivered-text: #166534;
-  --status-delivered-border: #bbf7d0;
+  --status-completed-border: #fcd34d;
+  
+  --status-delivered-bg: #ecfdf5;
+  --status-delivered-text: #047857;
+  --status-delivered-border: #6ee7b7;
+  
+  /* Button Colors */
+  --btn-secondary-bg: #6b7280;
+  --btn-secondary-hover: #4b5563;
+  --btn-danger-bg: #dc2626;
+  --btn-danger-hover: #b91c1c;
+  --delete-btn-bg: #fef2f2;
+  
+  /* Link Colors */
+  --link-color: #c9184a;
+  --link-hover: #a1143d;
+  --back-link-color: #c9184a;
+  
+  /* Login Styles */
+  --login-border: #f9a8ba;
+  --login-shadow: 0 10px 25px -5px rgba(201, 24, 74, 0.15);
+  
+  /* Theme Toggle */
+  --toggle-bg: #ffffff;
+  --toggle-border: #e5e7eb;
+  
+  /* Utility */
   --border-radius: 12px;
-  --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s ease;
+  --border-radius-sm: 8px;
+  --border-radius-lg: 16px;
+  --transition-fast: all 0.15s ease;
+  --transition-normal: all 0.3s ease;
 }
 
 /* ===== Dark Mode ===== */
+:root.dark-mode {
+  /* Primary Brand Colors - Brighter for dark bg */
+  --primary-color: #ff4d6d;
+  --primary-hover: #ff758f;
+  --primary-rgb: 255, 77, 109;
+  --primary-light: #ff8fa3;
+  
+  /* Background Colors - True dark */
+  --bg-color: #0f0f12;
+  --bg-gradient-start: #0f0f12;
+  --bg-gradient-end: #1a1a1f;
+  
+  /* Surface/Card Colors */
+  --card-bg: #1a1a1f;
+  --card-border: #2d2d35;
+  
+  /* Text Colors */
+  --text-main: #f4f4f5;
+  --text-secondary: #d4d4d8;
+  --text-muted: #a1a1aa;
+  --text-inverse: #0f0f12;
+  
+  /* Input Colors */
+  --input-bg: #232329;
+  --input-border: #3f3f46;
+  --input-focus-border: #ff4d6d;
+  --input-placeholder: #71717a;
+  
+  /* Border & Divider */
+  --border-color: #2d2d35;
+  --divider-color: #27272a;
+  
+  /* Interactive States */
+  --hover-row: #232329;
+  --active-row: #2d2d35;
+  
+  /* Feature Cards */
+  --feature-card-bg: #232329;
+  
+  /* Modal Colors */
+  --modal-bg: #1a1a1f;
+  --modal-overlay: rgba(0, 0, 0, 0.75);
+  --modal-detail-bg: #232329;
+  
+  /* Shadows - Darker for dark mode */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  
+  /* Status Colors - Dark Mode with good contrast */
+  --status-progress-bg: rgba(239, 68, 68, 0.15);
+  --status-progress-text: #f87171;
+  --status-progress-border: rgba(239, 68, 68, 0.3);
+  
+  --status-completed-bg: rgba(251, 191, 36, 0.15);
+  --status-completed-text: #fbbf24;
+  --status-completed-border: rgba(251, 191, 36, 0.3);
+  
+  --status-delivered-bg: rgba(34, 197, 94, 0.15);
+  --status-delivered-text: #4ade80;
+  --status-delivered-border: rgba(34, 197, 94, 0.3);
+  
+  /* Button Colors */
+  --btn-secondary-bg: #52525b;
+  --btn-secondary-hover: #71717a;
+  --btn-danger-bg: #dc2626;
+  --btn-danger-hover: #ef4444;
+  --delete-btn-bg: rgba(239, 68, 68, 0.15);
+  
+  /* Link Colors */
+  --link-color: #ff4d6d;
+  --link-hover: #ff8fa3;
+  --back-link-color: #ff8fa3;
+  
+  /* Login Styles */
+  --login-border: #3f3f46;
+  --login-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  
+  /* Theme Toggle */
+  --toggle-bg: #232329;
+  --toggle-border: #3f3f46;
+}
+
+/* System preference dark mode */
 @media (prefers-color-scheme: dark) {
   :root:not(.light-mode) {
-    --primary-color: #fb6f92;
-    --primary-hover: #f05e83;
-    --primary-rgb: 251, 111, 146;
-    --bg-color: #ffc2d1;
-    --bg-gradient-start: #ffc2d1;
-    --bg-gradient-end: #ffb3c1;
-    --card-bg: #f8f9fa;
-    --text-main: #1f2937;
-    --text-muted: #4b5563;
-    --text-secondary: #374151;
-    --border-color: #fb6f92;
-    --input-bg: #ffffff;
-    --input-border: #fb6f92;
-    --hover-row: #f1f3f5;
-    --feature-card-bg: #ffffff;
-    --modal-bg: #f8f9fa;
-    --modal-detail-bg: #f1f3f5;
-    --login-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    --login-border: #fb6f92;
-    --back-link-color: #4b5563;
-    --delete-btn-bg: #fee2e2;
-    --status-pending-bg: rgba(220, 38, 38, 0.15);
-    --status-pending-text: #dc2626;
-    --status-pending-border: rgba(220, 38, 38, 0.3);
-    --status-completed-bg: rgba(180, 83, 9, 0.15);
-    --status-completed-text: #b45309;
-    --status-completed-border: rgba(180, 83, 9, 0.3);
-    --status-delivered-bg: rgba(22, 101, 52, 0.15);
-    --status-delivered-text: #166534;
-    --status-delivered-border: rgba(22, 101, 52, 0.3);
-    --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    /* Primary Brand Colors */
+    --primary-color: #ff4d6d;
+    --primary-hover: #ff758f;
+    --primary-rgb: 255, 77, 109;
+    --primary-light: #ff8fa3;
+    
+    /* Background Colors */
+    --bg-color: #0f0f12;
+    --bg-gradient-start: #0f0f12;
+    --bg-gradient-end: #1a1a1f;
+    
+    /* Surface/Card Colors */
+    --card-bg: #1a1a1f;
+    --card-border: #2d2d35;
+    
+    /* Text Colors */
+    --text-main: #f4f4f5;
+    --text-secondary: #d4d4d8;
+    --text-muted: #a1a1aa;
+    --text-inverse: #0f0f12;
+    
+    /* Input Colors */
+    --input-bg: #232329;
+    --input-border: #3f3f46;
+    --input-focus-border: #ff4d6d;
+    --input-placeholder: #71717a;
+    
+    /* Border & Divider */
+    --border-color: #2d2d35;
+    --divider-color: #27272a;
+    
+    /* Interactive States */
+    --hover-row: #232329;
+    --active-row: #2d2d35;
+    
+    /* Feature Cards */
+    --feature-card-bg: #232329;
+    
+    /* Modal Colors */
+    --modal-bg: #1a1a1f;
+    --modal-overlay: rgba(0, 0, 0, 0.75);
+    --modal-detail-bg: #232329;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    
+    /* Status Colors */
+    --status-progress-bg: rgba(239, 68, 68, 0.15);
+    --status-progress-text: #f87171;
+    --status-progress-border: rgba(239, 68, 68, 0.3);
+    
+    --status-completed-bg: rgba(251, 191, 36, 0.15);
+    --status-completed-text: #fbbf24;
+    --status-completed-border: rgba(251, 191, 36, 0.3);
+    
+    --status-delivered-bg: rgba(34, 197, 94, 0.15);
+    --status-delivered-text: #4ade80;
+    --status-delivered-border: rgba(34, 197, 94, 0.3);
+    
+    /* Button Colors */
+    --btn-secondary-bg: #52525b;
+    --btn-secondary-hover: #71717a;
+    --btn-danger-bg: #dc2626;
+    --btn-danger-hover: #ef4444;
+    --delete-btn-bg: rgba(239, 68, 68, 0.15);
+    
+    /* Link Colors */
+    --link-color: #ff4d6d;
+    --link-hover: #ff8fa3;
+    --back-link-color: #ff8fa3;
+    
+    /* Login Styles */
+    --login-border: #3f3f46;
+    --login-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    
+    /* Theme Toggle */
+    --toggle-bg: #232329;
+    --toggle-border: #3f3f46;
   }
 }
 
-/* Manual dark mode override via toggle button */
-:root.dark-mode {
-  --primary-color: #fb6f92;
-  --primary-hover: #f05e83;
-  --primary-rgb: 251, 111, 146;
-  --bg-color: #ffc2d1;
-  --bg-gradient-start: #ffc2d1;
-  --bg-gradient-end: #ffb3c1;
-  --card-bg: #f8f9fa;
-  --text-main: #1f2937;
-  --text-muted: #4b5563;
-  --text-secondary: #374151;
-  --border-color: #fb6f92;
-  --input-bg: #ffffff;
-  --input-border: #fb6f92;
-  --hover-row: #f1f3f5;
-  --feature-card-bg: #ffffff;
-  --modal-bg: #f8f9fa;
-  --modal-detail-bg: #f1f3f5;
-  --login-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-  --login-border: #fb6f92;
-  --back-link-color: #4b5563;
-  --delete-btn-bg: #fee2e2;
-  --status-pending-bg: rgba(220, 38, 38, 0.15);
-  --status-pending-text: #dc2626;
-  --status-pending-border: rgba(220, 38, 38, 0.3);
-  --status-completed-bg: rgba(180, 83, 9, 0.15);
-  --status-completed-text: #b45309;
-  --status-completed-border: rgba(180, 83, 9, 0.3);
-  --status-delivered-bg: rgba(22, 101, 52, 0.15);
-  --status-delivered-text: #166534;
-  --status-delivered-border: rgba(22, 101, 52, 0.3);
-  --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+/* ===== Base Styles ===== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-main);
   line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* ===== Typography ===== */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-main);
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+/* ===== Container ===== */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
 }
 
-h1,
-h2,
-h3 {
-  color: var(--text-main);
-  margin-bottom: 1rem;
-}
-
+/* ===== Buttons ===== */
 button {
   padding: 10px 24px;
   border-radius: var(--border-radius);
@@ -137,68 +323,131 @@ button {
   background-color: var(--primary-color);
   color: white;
   font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: var(--transition);
-  box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.2);
+  transition: var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 button:hover {
   background-color: var(--primary-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.35);
 }
 
 button:active {
   transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(var(--primary-rgb), 0.2);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 button.secondary {
-  background-color: #6c757d;
+  background-color: var(--btn-secondary-bg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 button.secondary:hover {
-  background-color: #5a6268;
+  background-color: var(--btn-secondary-hover);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
+button.danger {
+  background-color: var(--btn-danger-bg);
+}
+
+button.danger:hover {
+  background-color: var(--btn-danger-hover);
+}
+
+/* ===== Forms ===== */
 input,
-select {
+select,
+textarea {
   width: 100%;
   padding: 12px 16px;
-  margin: 10px 0;
-  border: 1px solid var(--input-border);
+  margin: 8px 0;
+  border: 2px solid var(--input-border);
   border-radius: var(--border-radius);
   font-size: 1rem;
+  font-family: inherit;
   box-sizing: border-box;
-  transition: var(--transition);
+  transition: var(--transition-fast);
   background-color: var(--input-bg);
   color: var(--text-main);
 }
 
+input::placeholder,
+textarea::placeholder {
+  color: var(--input-placeholder);
+}
+
 input:focus,
-select:focus {
+select:focus,
+textarea:focus {
   outline: none;
-  border-color: var(--primary-color);
+  border-color: var(--input-focus-border);
   box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.15);
 }
 
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+select option {
+  background-color: var(--card-bg);
+  color: var(--text-main);
+}
+
+label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+/* ===== Cards ===== */
 .card {
   background: var(--card-bg);
   padding: 30px;
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  margin-bottom: 30px;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 24px;
+  transition: var(--transition-normal);
 }
 
+.card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===== Tables ===== */
 .table-container {
   overflow-x: auto;
   background: var(--card-bg);
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-md);
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 600px;
 }
 
 thead {
@@ -206,14 +455,20 @@ thead {
   color: white;
 }
 
-th {
-  padding: 15px;
-  text-align: left;
+thead th {
   font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+th {
+  padding: 14px 16px;
+  text-align: left;
 }
 
 td {
-  padding: 15px;
+  padding: 14px 16px;
   border-bottom: 1px solid var(--border-color);
   color: var(--text-main);
 }
@@ -222,132 +477,135 @@ tr:last-child td {
   border-bottom: none;
 }
 
-tr:hover {
+tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+tbody tr:hover {
   background-color: var(--hover-row);
 }
 
+/* ===== Status Badges ===== */
 .status-badge {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: bold;
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
   text-transform: capitalize;
+  border: 1px solid;
 }
 
 .status-in-progress {
-  background: #fff5f5;
-  color: #c53030;
+  background: var(--status-progress-bg);
+  color: var(--status-progress-text);
+  border-color: var(--status-progress-border);
 }
 
 .status-completed {
-  background: #fff3cd;
-  color: #856404;
+  background: var(--status-completed-bg);
+  color: var(--status-completed-text);
+  border-color: var(--status-completed-border);
 }
 
 .status-delivered {
-  background: #f0fff4;
-  color: #276749;
+  background: var(--status-delivered-bg);
+  color: var(--status-delivered-text);
+  border-color: var(--status-delivered-border);
 }
 
-/* Modal Overlay */
+/* ===== Modal ===== */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--modal-overlay);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
   animation: fadeIn 0.2s ease;
+  backdrop-filter: blur(4px);
 }
 
 .modal-box {
   background: var(--modal-bg);
-  padding: 35px;
-  border-radius: var(--border-radius);
+  padding: 32px;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--card-border);
   max-width: 420px;
   width: 90%;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-xl);
   text-align: center;
   color: var(--text-main);
+  animation: slideUp 0.3s ease;
 }
 
 .modal-box h3 {
   margin-top: 0;
-  color: #c53030;
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+}
+
+.modal-warning h3 {
+  color: var(--status-progress-text);
 }
 
 .modal-box p {
   color: var(--text-muted);
+  margin-bottom: 16px;
 }
 
 .modal-box .modal-detail {
   background: var(--modal-detail-bg);
+  border-radius: var(--border-radius-sm);
+  padding: 16px;
+  text-align: left;
+  margin: 16px 0;
+}
+
+.modal-box .modal-detail p {
+  margin: 6px 0;
   color: var(--text-main);
 }
 
 .modal-box .modal-actions {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   justify-content: center;
-  margin-top: 25px;
+  margin-top: 24px;
+}
+
+.modal-box .modal-actions button {
+  min-width: 100px;
 }
 
 @keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
   from {
     opacity: 0;
+    transform: translateY(20px);
   }
-
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Language Switcher */
-.lang-switcher {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.lang-switcher button {
-  padding: 5px 14px;
-  font-size: 0.8rem;
-  background: var(--feature-card-bg);
-  color: var(--text-main);
-  box-shadow: none;
-  border-radius: 20px;
-}
-
-.lang-switcher button:hover {
-  background: var(--border-color);
-}
-
-.lang-switcher button.active {
-  background: var(--primary-color);
-  color: white;
-}
-
-/* Branding subtitle */
-.brand-subtitle {
-  font-size: 0.85rem;
-  opacity: 0.85;
-  margin-top: 4px;
-  letter-spacing: 0.5px;
-}
-
-/* Neumorphic login styles */
+/* ===== Login Styles ===== */
 .login-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   padding: 20px;
-  background-color: var(--bg-color);
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
 }
 
 .login-box {
@@ -356,6 +614,7 @@ tr:hover {
   max-width: 420px;
   padding: 40px;
   border: 1px solid var(--login-border);
+  border-radius: var(--border-radius);
   box-shadow: var(--login-shadow);
   position: relative;
 }
@@ -367,23 +626,24 @@ tr:hover {
   left: 0;
   width: 100%;
   height: 4px;
-  background-color: var(--primary-color);
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light, #ff758f));
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
 .login-box h2 {
   margin-top: 0;
   margin-bottom: 8px;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--text-main);
 }
 
-.login-box p {
+.login-box > p {
   color: var(--text-muted);
-  font-size: 14px;
-  margin-bottom: 30px;
+  font-size: 0.95rem;
+  margin-bottom: 28px;
 }
 
 .input-group {
@@ -393,28 +653,30 @@ tr:hover {
 
 .input-group label {
   display: block;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  margin-bottom: 6px;
-  color: var(--back-link-color);
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
 }
 
 .login-box input {
   width: 100%;
-  padding: 12px 15px;
+  padding: 14px 16px;
   border: 2px solid var(--input-border);
+  border-radius: var(--border-radius-sm);
   background: var(--input-bg);
-  font-size: 14px;
+  font-size: 1rem;
   box-sizing: border-box;
-  transition: all 0.2s ease;
+  transition: var(--transition-fast);
   color: var(--text-main);
 }
 
 .login-box input:focus {
   outline: none;
   border-color: var(--primary-color);
-  background: var(--card-bg);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.15);
 }
 
 .login-button {
@@ -423,16 +685,19 @@ tr:hover {
   background-color: var(--primary-color);
   color: white;
   border: none;
+  border-radius: var(--border-radius);
   font-weight: 700;
+  font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   cursor: pointer;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
-  margin-top: 10px;
+  transition: var(--transition-fast);
+  margin-top: 12px;
 }
 
 .login-button:hover {
   filter: brightness(1.1);
+  transform: translateY(-1px);
 }
 
 .login-button:active {
@@ -441,10 +706,10 @@ tr:hover {
 
 .back-home {
   display: inline-block;
-  margin-top: 25px;
+  margin-top: 24px;
   color: var(--back-link-color);
   text-decoration: none;
-  font-size: 13px;
+  font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
   transition: color 0.2s ease;
@@ -454,30 +719,139 @@ tr:hover {
   color: var(--primary-color);
 }
 
-/* Theme Toggle Button */
+/* ===== Language Switcher ===== */
+.lang-switcher {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.lang-switcher button {
+  padding: 6px 16px;
+  font-size: 0.8rem;
+  background: var(--feature-card-bg);
+  color: var(--text-main);
+  box-shadow: none;
+  border-radius: 50px;
+  border: 1px solid var(--border-color);
+}
+
+.lang-switcher button:hover {
+  background: var(--hover-row);
+  transform: none;
+  box-shadow: none;
+}
+
+.lang-switcher button.active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* ===== Theme Toggle Button ===== */
 .theme-toggle {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 48px;
-  height: 48px;
+  bottom: 24px;
+  right: 24px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  border: none;
-  background: var(--card-bg);
+  border: 2px solid var(--toggle-border);
+  background: var(--toggle-bg);
   color: var(--text-main);
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   cursor: pointer;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-lg);
   z-index: 999;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: var(--transition-fast);
 }
 
 .theme-toggle:hover {
-  transform: scale(1.1);
-  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.3);
-  background: var(--card-bg);
+  transform: scale(1.08);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary-color);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* ===== Utility Classes ===== */
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-primary {
+  color: var(--primary-color);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+
+/* ===== Scrollbar Styling ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ===== Selection ===== */
+::selection {
+  background: rgba(var(--primary-rgb), 0.3);
+  color: var(--text-main);
+}
+
+/* ===== Focus Visible ===== */
+:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* ===== Print Styles ===== */
+@media print {
+  .theme-toggle,
+  .modal-overlay {
+    display: none !important;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+}
+
+/* Branding subtitle */
+.brand-subtitle {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  margin-top: 4px;
+  letter-spacing: 0.5px;
 }
